@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RsoEndpointService } from './server-communication/rso-endpoint.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'RSOhub-spa';
+    title = 'RSOhub';
+
+    constructor(public rsoEndpointService: RsoEndpointService) {}
+
+    public async handleDemoClick(): Promise<void> {
+        const response = await this.rsoEndpointService.getValues();
+        console.log(response);
+    }
 }
