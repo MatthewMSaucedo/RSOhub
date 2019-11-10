@@ -6,3 +6,20 @@ export interface Values {
 export interface GetValuesResponse {
     values: Values[];
 }
+
+export interface LoginResponse {
+
+}
+
+export interface LoginRequest {
+    Username: string;
+    Password: string;
+}
+
+export interface RegisterResponse {
+
+}
+
+export interface RegisterRequest {
+
+}

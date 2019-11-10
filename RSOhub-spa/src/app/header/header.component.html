@@ -1,0 +1,37 @@
+<div class="smt-navbar">
+    <div class="smt-nav-header">
+        <span>
+            Stock Market Valuations
+        </span>
+    </div>
+    <nav class="smt-nav-body">
+        <div class="empty-border-bottom"></div>
+        <div class="smt-nav-body-content">
+            <div
+                *ngIf="!isLoggedIn"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-person icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink="/auth">
+                    Login
+                </a>
+            </div>
+            <!-- <div
+                *ngIf="isLoggedIn"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-person icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink=TODO:>
+                    Profile
+                </a>
+            </div> -->
+        </div>
+        <div class="empty-border-bottom"></div>
+    </nav>
+</div>
