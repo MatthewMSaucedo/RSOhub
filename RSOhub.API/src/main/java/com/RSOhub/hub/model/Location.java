@@ -9,20 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Value {
+public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int id;
-    @Getter @Setter private int number;
+    @Getter @Setter private int locationId;
+    @Getter @Setter private String name;
 
-    public Value() { }
+    public Location() { }
 
-    public Value(int id, int number) {
-        this.id = id;
-        this.number = number;
-    }
-
-    public Value(int number) {
-        this.number = number;
+    public Location(String name) {
+        this.name = name;
     }
 }
