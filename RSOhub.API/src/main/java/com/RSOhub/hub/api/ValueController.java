@@ -3,12 +3,11 @@ package com.RSOhub.hub.api;
 import com.RSOhub.hub.dao.ValueRepository;
 import com.RSOhub.hub.model.Value;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequestMapping("api/value")
 @RestController
@@ -31,20 +30,25 @@ public class ValueController {
         return valueRepository.findAll();
     }
 
-    /*
     @GetMapping(path = "{id}")
-    public Value getValueById(@PathVariable("id") UUID id) {
-        return valueRepository.getValueById(id)
-                .orElse(null);
+    public Value getValue(@PathVariable("id") int id) {
+        Optional<Value> value = valueRepository.findById(id);
+        return value.get();
     }
 
     @DeleteMapping(path = "{id}")
-    public void deletePersonById(@PathVariable("id") UUID id) {
-        valueRepository.deleteValue(id);
+    public Value deleteValueById(@PathVariable("id") int id) {
+        Optional<Value> deletedValue = valueRepository.findById(id);
+        valueRepository.deleteById(id);
+        return deletedValue.get();
     }
 
     @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Value valueToUpdate) {
-        valueRepository.updateValue(id, valueToUpdate);
-    }*/
+    public Value updateValue(@PathVariable("id") int id, @RequestBody Map<String, Integer> newValue) {
+        Optional<Value> oldValue = valueRepository.findById(id);
+        int number = newValue.get("number");
+        Value updatedValue = new Value(oldValue.get().getId(), number);
+
+        return valueRepository.save(updatedValue);
+    }
 }
