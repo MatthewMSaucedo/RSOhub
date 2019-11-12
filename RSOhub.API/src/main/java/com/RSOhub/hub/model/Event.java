@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 
 @Entity
 public class Event {
@@ -15,14 +14,14 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private int eventId;
     @Getter @Setter private int refLocationId;
-    @Getter @Setter private LocalDateTime time;
+    @Getter @Setter private String time;
     @Getter @Setter private String name;
     @Getter @Setter private String description;
     @Getter @Setter private EventType eventType;
 
     public Event() { }
 
-    public Event(int refLocationId, LocalDateTime time, String name, String description, EventType eventType) {
+    public Event(int refLocationId, String time, String name, String description, EventType eventType) {
         this.refLocationId = refLocationId;
         this.time = time;
         this.name = name;

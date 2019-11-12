@@ -18,7 +18,7 @@ public class Comment {
     @Getter @Setter private int refEventId;
     @Getter @Setter private String text;
     @Getter @Setter private int rating;
-    @Getter @Setter private LocalDateTime time;
+    @Getter @Setter private String time;
 
     public Comment() { }
 
@@ -27,6 +27,6 @@ public class Comment {
         this.refEventId = refEventId;
         this.text = text;
         this.rating = rating;
-        this.time = LocalDateTime.now();
+        this.time = LocalDateTime.now().toString();
     }
 }
