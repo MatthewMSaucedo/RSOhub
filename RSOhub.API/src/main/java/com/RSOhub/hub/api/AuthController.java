@@ -40,4 +40,13 @@ public class AuthController {
             return null;
         }
     }
+
+    @PostMapping(path = "register_generic")
+    public User register(@RequestBody User user) {
+        try {
+            return userRepository.save(user);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
