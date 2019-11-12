@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int universityId;
+    @Getter @Setter private int id;
     @Getter @Setter private String name;
     @Getter @Setter private String description;
     @Getter @Setter private int refLocationId;

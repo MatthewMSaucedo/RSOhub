@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class Rso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int rsoId;
+    @Getter @Setter private int id;
     @Getter @Setter private String name;
     @Getter @Setter private boolean isActive;
     @Getter @Setter private int memberCount;

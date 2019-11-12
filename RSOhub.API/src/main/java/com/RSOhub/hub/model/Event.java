@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int eventId;
+    @Getter @Setter private int id;
     @Getter @Setter private int refLocationId;
     @Getter @Setter private String time;
     @Getter @Setter private String name;

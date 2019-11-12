@@ -10,7 +10,7 @@ CREATE TABLE value (
 );
 
 CREATE TABLE comment (
-    commentId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     refUserId INT(6) UNSIGNED,
     refEventId INT(6) UNSIGNED,
     text VARCHAR(255),
@@ -19,28 +19,28 @@ CREATE TABLE comment (
 );
 
 CREATE TABLE event (
-    eventId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     refLocationId INT(6) UNSIGNED,
     time VARCHAR(255),
     name VARCHAR(255),
     description VARCHAR(255),
-    eventType VARCHAR(255)
+    eventType  ENUM('PUBLIC', 'PRIVATE', 'RSO') default NULL
 );
 
 CREATE TABLE location (
-    locationId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );
 
 CREATE TABLE rso (
-    rsoId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     isActive BOOLEAN,
     memberCount INT(6) UNSIGNED
 );
 
 CREATE TABLE university (
-    universityId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     refLocationId INT(6) UNSIGNED,
     name VARCHAR(255),
     description VARCHAR(255),
@@ -48,9 +48,9 @@ CREATE TABLE university (
 );
 
 CREATE TABLE user (
-    userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    refUniversityId INT(6) UNSIGNED,
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    refUniversityId INT(6) UNSIGNED NULL,
     username VARCHAR(255),
     password VARCHAR(255),
-    userType VARCHAR(255)
+    userType ENUM('STANDARD', 'ADMIN', 'SUPER_ADMIN') default NULL
 );

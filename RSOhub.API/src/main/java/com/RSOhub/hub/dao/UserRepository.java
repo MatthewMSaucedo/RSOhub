@@ -8,4 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> { }
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    User findByUsernameAndPassword(String username, String password);
+
+}

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter private int userId;
+    @Getter @Setter private int id;
     @Getter @Setter private String username;
     @Getter @Setter private String password;
     @Getter @Setter private int refUniversityId;
@@ -24,6 +24,12 @@ public class User {
         this.username = username;
         this.password = password;
         this.refUniversityId = refUniversityId;
+        this.userType = userType;
+    }
+
+    public User(String username, String password, UserType userType) {
+        this.username = username;
+        this.password = password;
         this.userType = userType;
     }
 }
