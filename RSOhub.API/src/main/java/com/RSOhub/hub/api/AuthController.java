@@ -23,11 +23,12 @@ public class AuthController {
     }
 
     @PostMapping(path = "login")
-    public User login(@RequestBody LoginOrRegisterRequest loginRequest) {
+    public boolean login(@RequestBody LoginOrRegisterRequest loginRequest) {
         try {
-            return userRepository.findByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
+            userRepository.findByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
+            return true;
         } catch (Exception e) {
-            return null;
+            return false;
         }
     }
 

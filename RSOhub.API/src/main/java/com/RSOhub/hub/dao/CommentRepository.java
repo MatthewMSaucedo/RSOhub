@@ -8,4 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface CommentRepository extends JpaRepository<Comment, Integer> { }
+public interface CommentRepository extends JpaRepository<Comment, Integer> {
+
+    List<Comment> findByRefEventId(int refEventId);
+}
