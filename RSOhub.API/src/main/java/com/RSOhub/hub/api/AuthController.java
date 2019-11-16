@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 @RequestMapping("api/auth")
 @RestController
 public class AuthController {
     private final UserRepository userRepository;
+    private final String salt = "2w354ytw4yhyw6h";
 
     @Autowired
     public AuthController(UserRepository userRepository) {
@@ -25,8 +28,9 @@ public class AuthController {
     @PostMapping(path = "login")
     public boolean login(@RequestBody LoginOrRegisterRequest loginRequest) {
         try {
-            userRepository.findByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
-            return true;
+            String hashedPassword = encryptPassword(loginRequest.getPassword());
+            User foundUser = userRepository.findByUsernameAndPassword(loginRequest.getUsername(), hashedPassword);
+            return foundUser != null;
         } catch (Exception e) {
             return false;
         }
@@ -35,7 +39,8 @@ public class AuthController {
     @PostMapping(path = "register")
     public User register(@RequestBody LoginOrRegisterRequest registerRequest) {
         try {
-            User newUser = new User(registerRequest.getUsername(), registerRequest.getPassword(), UserType.STANDARD);
+            String hashedPassword = encryptPassword(registerRequest.getPassword());
+            User newUser = new User(registerRequest.getUsername(), hashedPassword, "STANDARD");
             return userRepository.save(newUser);
         } catch (Exception e) {
             return null;
@@ -49,5 +54,12 @@ public class AuthController {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private String encryptPassword(String password) throws NoSuchAlgorithmException {
+        password += salt;
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        messageDigest.update(password.getBytes());
+        return new String(messageDigest.digest());
     }
 }

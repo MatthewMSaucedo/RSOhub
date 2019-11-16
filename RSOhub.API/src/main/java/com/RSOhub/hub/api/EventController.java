@@ -49,9 +49,11 @@ public class EventController {
     @PostMapping(path = "listUserEvents")
     public List<Event> listUserEvents(@RequestBody User user) {
         List<RsoMembership> userRsos = rsoMembershipRepository.findByRefUserId(user.getId());
-        return userRsos.stream()
+        List<Integer> userRsoIds = userRsos.stream()
                 .map(rso -> rso.getRefRsoId())
-                .map(eventRepository::findByRefRsoId)
                 .collect(Collectors.toList());
+
+        // TODO: Get events
+        return null;
     }
 }

@@ -12,10 +12,10 @@ services:
     command: mysqld --default-authentication-plugin=mysql_native_password --innodb_flush_neighbors=0
     ports:
       # Port Expose : MySQL Port running inside container
-      - '8080:8080'
+      - '3306:3306'
     expose:
-      # Opens port 8080 on the container
-      - '8080'
+      # Opens port 3306 on the container
+      - '3306'
     # Where data will be persisted
     volumes:
       -my-db:/var/lib/mysql

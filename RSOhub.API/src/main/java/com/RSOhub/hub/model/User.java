@@ -16,18 +16,18 @@ public class User {
     @Getter @Setter private String username;
     @Getter @Setter private String password;
     @Getter @Setter private int refUniversityId;
-    @Getter @Setter private UserType userType;
+    @Getter @Setter private String userType;
 
     public User() { }
 
-    public User(String username, String password, int refUniversityId, UserType userType) {
+    public User(String username, String password, int refUniversityId, String userType) {
         this.username = username;
         this.password = password;
         this.refUniversityId = refUniversityId;
         this.userType = userType;
     }
 
-    public User(String username, String password, UserType userType) {
+    public User(String username, String password, String userType) {
         this.username = username;
         this.password = password;
         this.userType = userType;

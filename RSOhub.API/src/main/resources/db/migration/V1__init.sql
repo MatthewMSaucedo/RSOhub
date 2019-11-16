@@ -52,7 +52,7 @@ CREATE TABLE user (
     refUniversityId INT(6) UNSIGNED NULL,
     username VARCHAR(255) UNIQUE,
     password VARCHAR(255),
-    userType ENUM('STANDARD', 'ADMIN', 'SUPER_ADMIN') default NULL
+    user_type ENUM('STANDARD', 'ADMIN', 'SUPER_ADMIN') default NULL
 );
 
 CREATE TABLE rso_membership (
