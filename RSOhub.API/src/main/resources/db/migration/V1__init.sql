@@ -16,6 +16,7 @@ CREATE TABLE comment (
 CREATE TABLE event (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     ref_location_id INT(6) UNSIGNED,
+    ref_rso_id INT(6) UNSIGNED,
     time VARCHAR(255),
     name VARCHAR(255),
     description VARCHAR(255),

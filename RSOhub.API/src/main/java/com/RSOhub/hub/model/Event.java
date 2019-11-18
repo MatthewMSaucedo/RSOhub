@@ -14,15 +14,15 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private int id;
     @Getter @Setter private int refLocationId;
-    @Getter @Setter private int refRsoId; //TODO: add to SQL.
+    @Getter @Setter private int refRsoId;
     @Getter @Setter private String time;
     @Getter @Setter private String name;
     @Getter @Setter private String description;
-    @Getter @Setter private EventType eventType;
+    @Getter @Setter private String eventType;
 
     public Event() { }
 
-    public Event(int refLocationId, int refRsoId, String time, String name, String description, EventType eventType) {
+    public Event(int refLocationId, int refRsoId, String time, String name, String description, String eventType) {
         this.refLocationId = refLocationId;
         this.refRsoId = refRsoId;
         this.time = time;

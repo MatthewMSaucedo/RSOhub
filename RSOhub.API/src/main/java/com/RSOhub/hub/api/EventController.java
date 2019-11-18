@@ -9,6 +9,7 @@ import com.RSOhub.hub.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,11 +50,9 @@ public class EventController {
     @PostMapping(path = "listUserEvents")
     public List<Event> listUserEvents(@RequestBody User user) {
         List<RsoMembership> userRsos = rsoMembershipRepository.findByRefUserId(user.getId());
-        List<Integer> userRsoIds = userRsos.stream()
+        return userRsos.stream()
                 .map(rso -> rso.getRefRsoId())
+                .map(eventRepository::findByRefRsoId)
                 .collect(Collectors.toList());
-
-        // TODO: Get events
-        return null;
     }
 }

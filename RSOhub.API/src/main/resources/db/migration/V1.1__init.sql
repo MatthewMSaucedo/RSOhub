@@ -6,11 +6,11 @@ VALUES (1, 1, 1, 'test comment 1', 5, '5:30PM');
 insert into comment
 VALUES (2, 3, 2, 'test comment 2', 5, '8:30PM');
 
-/* id, locationId, time, name, descr, eventType */
+/* id, locationId, rsoId, time, name, descr, eventType */
 insert into event
-VALUES (1, 1, '5:00PM', 'test event', 'this is a test event', 'PUBLIC');
+VALUES (1, 1, 1, '5:00PM', 'test event', 'this is a test event', 'PUBLIC');
 insert into event
-VALUES (2, 3, '8:00PM', 'test event 2', 'this is a second test event', 'PUBLIC');
+VALUES (2, 3, 2, '8:00PM', 'test event 2', 'this is a second test event', 'PUBLIC');
 
 /* id, name */
 insert into location

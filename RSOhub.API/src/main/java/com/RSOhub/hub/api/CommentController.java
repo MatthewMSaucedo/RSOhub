@@ -9,16 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
-/* TODO:
+/*
  * List
- *   1) list comments by Rso
+ *   1) list comments by Rso (check)
  * -----------------------------------------
  * Create
- *   1) add comment
+ *   1) add comment (check)
  * -----------------------------------------
  * Delete
- *   1) delete comment
+ *   1) delete comment (check)
  */
 @RequestMapping("api/comment")
 @RestController
@@ -36,9 +37,14 @@ public class CommentController {
     }
 
     @PostMapping(path = "delete")
-    public Comment delete(@RequestBody Comment comment) {
-        commentRepository.delete(comment);
-        return comment;
+    public Comment delete(@RequestBody int commentId) {
+        try {
+            Optional<Comment> deletedComment = commentRepository.findById(commentId);
+            commentRepository.deleteById(commentId);
+            return deletedComment.get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @PostMapping(path = "listByEvent")
