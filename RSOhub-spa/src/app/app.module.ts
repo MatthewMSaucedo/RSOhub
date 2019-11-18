@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   providers: [ HttpClient ],
   bootstrap: [ AppComponent ]
