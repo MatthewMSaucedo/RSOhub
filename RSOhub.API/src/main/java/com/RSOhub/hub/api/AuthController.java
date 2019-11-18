@@ -2,6 +2,7 @@ package com.RSOhub.hub.api;
 
 import com.RSOhub.hub.dao.UserRepository;
 import com.RSOhub.hub.dto.LoginOrRegisterRequest;
+import com.RSOhub.hub.dto.LoginResponse;
 import com.RSOhub.hub.model.User;
 import com.RSOhub.hub.model.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,16 @@ public class AuthController {
     }
 
     @PostMapping(path = "login")
-    public boolean login(@RequestBody LoginOrRegisterRequest loginRequest) {
+    public LoginResponse login(@RequestBody LoginOrRegisterRequest loginRequest) {
         try {
             String hashedPassword = encryptPassword(loginRequest.getPassword());
             User foundUser = userRepository.findByUsernameAndPassword(loginRequest.getUsername(), hashedPassword);
-            return foundUser != null;
+            if (foundUser == null) {
+                return new LoginResponse(false);
+            }
+            return new LoginResponse(foundUser.getUsername(), foundUser.getUserType(), true);
         } catch (Exception e) {
-            return false;
+            return new LoginResponse(false);
         }
     }
 
@@ -40,7 +44,11 @@ public class AuthController {
     public User register(@RequestBody LoginOrRegisterRequest registerRequest) {
         try {
             String hashedPassword = encryptPassword(registerRequest.getPassword());
-            User newUser = new User(registerRequest.getUsername(), hashedPassword, "STANDARD");
+            User newUser = new User(
+                    registerRequest.getUsername(),
+                    hashedPassword, registerRequest.getRefUniversityId(),
+                    "STANDARD"
+            );
             return userRepository.save(newUser);
         } catch (Exception e) {
             return null;
