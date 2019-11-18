@@ -14,7 +14,7 @@ public class Rso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private int id;
     @Getter @Setter private String name;
-    @Getter @Setter private boolean isActive;
+    @Getter @Setter public boolean isActive;
     @Getter @Setter private int memberCount;
 
     public Rso() { }

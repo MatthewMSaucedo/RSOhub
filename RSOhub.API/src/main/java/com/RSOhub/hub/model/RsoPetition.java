@@ -14,6 +14,5 @@ public class RsoPetition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private int id;
     @Getter @Setter private int refRsoId;
-    @Getter @Setter private int refUserId
-            ;
+    @Getter @Setter private int refUserId;
 }
