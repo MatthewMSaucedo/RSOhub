@@ -19,7 +19,9 @@
     "@angular/platform-browser": "~8.2.3",
     "@angular/platform-browser-dynamic": "~8.2.3",
     "@angular/router": "~8.2.3",
+    "bootstrap": "^3.3.7",
     "ngx-toastr": "^11.2.1",
+    "open-iconic": "^1.1.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

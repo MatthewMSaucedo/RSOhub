@@ -6,10 +6,7 @@ import com.RSOhub.hub.dto.LoginResponse;
 import com.RSOhub.hub.model.User;
 import com.RSOhub.hub.model.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,6 +23,7 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "login")
     public LoginResponse login(@RequestBody LoginOrRegisterRequest loginRequest) {
         try {
@@ -40,6 +38,7 @@ public class AuthController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "register")
     public User register(@RequestBody LoginOrRegisterRequest registerRequest) {
         try {
@@ -55,6 +54,7 @@ public class AuthController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "register_generic")
     public User register(@RequestBody User user) {
         try {

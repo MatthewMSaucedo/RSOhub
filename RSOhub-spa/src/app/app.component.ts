@@ -9,10 +9,5 @@ import { RsoEndpointService } from './server-communication/rso-endpoint.service'
 export class AppComponent {
     title = 'RSOhub';
 
-    constructor(public rsoEndpointService: RsoEndpointService) {}
-
-    public async handleDemoClick(): Promise<void> {
-        const response = await this.rsoEndpointService.getValues();
-        console.log(response);
-    }
+    constructor() {}
 }

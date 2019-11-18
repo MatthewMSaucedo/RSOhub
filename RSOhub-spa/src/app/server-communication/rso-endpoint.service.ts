@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginResponse, LoginRequest, RegisterResponse, RegisterRequest, CreateCommentRequest, CreateCommentResponse, DeleteCommentResponse, ListCommentResponse, PetitionRequest, JoinRequest } from './rso-endpoint.constants';
+import { HttpHeaders } from '@angular/common/http';
+import { LoginResponse, LoginRequest, RegisterResponse, RegisterRequest, CreateCommentRequest, CreateCommentResponse, DeleteCommentResponse, ListCommentResponse, PetitionRequest, JoinRequest, ListRsoByUserIdResponse } from './rso-endpoint.constants';
 
 @Injectable({ providedIn: 'root' })
 export class RsoEndpointService {
     private _dbUrl = 'http://localhost:8080/api/';
+    public httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'my-auth-token'
+        })
+    };
 
     constructor(private http: HttpClient) { }
 
@@ -28,10 +35,20 @@ export class RsoEndpointService {
         return this.http.post<ListCommentResponse>(this._dbUrl + 'comment/listByEvent', eventId).toPromise();
     }
 
-    public listRsoByUserId(userId: number) { }
+    public listRsoByUserId(userId: number): Promise<ListRsoByUserIdResponse> {
+        return this.http.post<ListRsoByUserIdResponse>(this._dbUrl + 'rso/listByUserId', userId).toPromise();
+    }
 
-    public createPetition(petitionRequest: PetitionRequest) { }
+    public createPetition(petitionRequest: PetitionRequest) {
+        return this.http.post(this._dbUrl + 'rso/petition', petitionRequest).toPromise();
+    }
 
-    public joinRso(joinRequest: JoinRequest) { }
+    public joinRso(joinRequest: JoinRequest) {
+        return this.http.post(this._dbUrl + 'rso/join', joinRequest).toPromise();
+    }
+
+    public getUniversityIdFromName(request): Promise<number> {
+        return this.http.post<number>(this._dbUrl + 'university/findByName', request, this.httpOptions).toPromise();
+    }
 
 }

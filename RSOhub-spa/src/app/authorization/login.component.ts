@@ -58,9 +58,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
     public toastSubscription: Subscription;
-    public errorSubscription: Subscription;
     private _username: string;
-    public error: string;
 
     constructor(
         public router: Router,
@@ -71,13 +69,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.authService.currentView.next('login');
-        this.errorSubscription = this.authService.error.subscribe((error: string) => this.error = error);
         this.toastSubscription = this.authService.loginToast.subscribe((success: boolean) => {
             if (success) {
                 this._toastrService.success(`Welcome, ${this._username}!`, 'Login succeeded');
-                this.router.navigate(['security-analysis']);
+                //this.router.navigate(['security-analysis']); TODO: Route somewhere.
             } else {
-                this._toastrService.error(this.error, 'Login failed');
+                this._toastrService.error('Login failed');
             }
         });
     }
@@ -96,7 +93,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.errorSubscription.unsubscribe();
         this.toastSubscription.unsubscribe();
     }
 }

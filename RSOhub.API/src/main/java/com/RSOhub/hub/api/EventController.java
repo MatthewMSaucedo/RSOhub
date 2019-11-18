@@ -37,16 +37,19 @@ public class EventController {
         this.rsoMembershipRepository = rsoMembershipRepository;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "create")
     public Event create(@RequestBody Event event) {
         return eventRepository.save(event);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "list")
     public List<Event> listEvents() {
         return eventRepository.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "listUserEvents")
     public List<Event> listUserEvents(@RequestBody User user) {
         List<RsoMembership> userRsos = rsoMembershipRepository.findByRefUserId(user.getId());

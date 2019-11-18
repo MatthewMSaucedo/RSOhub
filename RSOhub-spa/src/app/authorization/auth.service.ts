@@ -1,29 +1,29 @@
 import { Subject } from 'rxjs';
-import { Injectable } from '@angular/core';
 import { RsoEndpointService } from '../server-communication/rso-endpoint.service';
+import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     public currentView = new Subject<string>();
     public loginToast = new Subject<boolean>();
     public registerToast = new Subject<boolean>();
-    public error = new Subject<string>();
     public isLoggedIn = new Subject<boolean>();
-    private _authToken: string;
     public loggedInUser: string;
+    public userType: string;
 
     constructor(public endpointService: RsoEndpointService) { }
 
-    public getToken(): string {
-        return this._authToken;
-    }
-
-    public async registerUser(username: string, email: string, password: string): Promise<void> {
+    public async registerUser(username: string, universityName: string, password: string): Promise<void> {
         try {
-            const response = await this.endpointService.register({username, password});
-            this.registerToast.next(true);
+            const refUniversityId = await this.endpointService.getUniversityIdFromName({universityName});
+
+            const response = await this.endpointService.register({username, refUniversityId, password});
+            if (response != null) {
+                this.registerToast.next(true);
+            } else {
+                this.registerToast.next(false);
+            }
         } catch (error) {
-            this.error.next(error.error.error.message);
             this.registerToast.next(false);
         }
     }
@@ -31,12 +31,15 @@ export class AuthService {
     public async login(username: string, password: string): Promise<void> {
         try {
             const response = await this.endpointService.login({username, password});
-            this._authToken = response.token;
-            this.loginToast.next(true);
-            this.isLoggedIn.next(true);
-            this.loggedInUser = username;
+            if (response.loginSuccessful) {
+                this.loginToast.next(true);
+                this.isLoggedIn.next(true);
+                this.loggedInUser = username;
+                this.userType = response.userType;
+            } else {
+                this.loginToast.next(false);
+            }
         } catch (error) {
-            this.error.next(error.error.message);
             this.loginToast.next(false);
         }
     }

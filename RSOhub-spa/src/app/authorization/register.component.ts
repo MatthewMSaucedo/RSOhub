@@ -13,14 +13,13 @@ import { ToastrService } from 'ngx-toastr';
                 <div class="input-body">
                     <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
                         <div class="form-group shorter-input-box">
-                            <input type="email"
-                            id="email"
+                            <input type="university"
+                            id="university"
                             class="form-control"
                             ngModel
-                            name="email"
+                            name="university"
                             required
-                            email
-                            placeholder="Email"
+                            placeholder="University"
                             />
                         </div>
                         <div class="form-group shorter-input-box">
@@ -29,7 +28,6 @@ import { ToastrService } from 'ngx-toastr';
                             class="form-control"
                             name="username"
                             ngModel
-                            maxlength="12"
                             required
                             placeholder="Username"
                             />
@@ -41,7 +39,6 @@ import { ToastrService } from 'ngx-toastr';
                             name="password"
                             type="password"
                             ngModel
-                            minlength="6"
                             required
                             placeholder="Password"
                             />
@@ -69,8 +66,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
     public toastSubscription: Subscription;
-    public errorSubscription: Subscription;
-    public error: string;
 
     constructor(
         public router: Router,
@@ -81,13 +76,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.authService.currentView.next('register');
-        this.errorSubscription = this.authService.error.subscribe((error: string) => this.error = error);
         this.toastSubscription = this.authService.registerToast.subscribe((success: boolean) => {
             if (success) {
                 this._toastrService.success('Registration succeeded');
                 // TODO: await a sleep, then redirect?
             } else {
-                this._toastrService.error(this.error, 'Registration failed');
+                this._toastrService.error('Registration failed');
             }
         });
     }
@@ -98,17 +92,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     public async onSubmit(form: NgForm): Promise<void> {
-        const email = form.value.email;
+        const university = form.value.university;
         const password = form.value.password;
         const username = form.value.username;
 
         console.log(form.value);
-        await this.authService.registerUser(username, email, password);
+        await this.authService.registerUser(username, university, password);
         form.reset();
     }
 
     ngOnDestroy(): void {
-        this.errorSubscription.unsubscribe();
         this.toastSubscription.unsubscribe();
     }
 }
