@@ -120,3 +120,8 @@ export interface ListEventsOfUserRequest {
     password: string;
     userType: string;
 }
+
+export interface GetLocationResponse {
+    id: number;
+    name: string;
+}

@@ -15,6 +15,7 @@ import { EventsComponent } from './events/events.component';
 import { UniversityComponent } from './university/university.component';
 import { PetitionComponent } from './petition/petition.component';
 import { RsoComponent } from './rso/rso.component';
+import { MakeEventComponent } from './make-event/make-event.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RsoComponent } from './rso/rso.component';
     UniversityComponent,
     PetitionComponent,
     RsoComponent,
+    MakeEventComponent,
   ],
   imports: [
     BrowserModule,

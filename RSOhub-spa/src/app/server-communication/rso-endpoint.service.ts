@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { LoginResponse, LoginRequest, RegisterResponse, RegisterRequest, CreateCommentRequest, CreateCommentResponse, DeleteCommentResponse, ListCommentResponse, PetitionRequest, JoinRequest, ListRsoByUserIdResponse } from './rso-endpoint.constants';
+import { LoginResponse, LoginRequest, RegisterResponse, RegisterRequest, CreateCommentRequest, CreateCommentResponse, DeleteCommentResponse, ListCommentResponse, PetitionRequest, JoinRequest, ListRsoByUserIdResponse, GetLocationResponse } from './rso-endpoint.constants';
+import { _Event } from '../events/events.component';
 
 @Injectable({ providedIn: 'root' })
 export class RsoEndpointService {
@@ -51,8 +52,12 @@ export class RsoEndpointService {
         return this.http.post<number>(this._dbUrl + 'university/findByName', request).toPromise();
     }
 
-    public listUserEvents(request) {
+    public listUserEvents(request): Promise<_Event[]> {
         return this.http.post(this._dbUrl + 'event/listUserEvents', request).toPromise();
+    }
+
+    public getLocation(request): Promise<GetLocationResponse> {
+        return this.http.post<GetLocationResponse>(this._dbUrl + 'location/get', request).toPromise();
     }
 
 }
