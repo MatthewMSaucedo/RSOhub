@@ -11,7 +11,7 @@ export class EventsService {
         public authService: AuthService
     ) {}
 
-    public async listUserEvents(): Promise<_Event[]> {
+    public async listUserEvents() {
         return await this.endpointService.listUserEvents({refUserId: this.authService.userId});
     }
 
@@ -24,12 +24,16 @@ export class EventsService {
         return eventLocations;
     }
 
-    public async listEventComments(events: _Event[]): Promise<CreateCommentResponse[]> {
+    public async listEventComments(events: _Event[]) {
         let eventComments = [];
         for (let event of events) {
             const comments = await this.endpointService.listComment(event.id);
             eventComments.push(comments);
         }
         return eventComments;
+    }
+
+    public async createComment(comment) {
+        await this.endpointService.createComment(comment);
     }
 }

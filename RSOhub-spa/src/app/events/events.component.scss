@@ -18,6 +18,24 @@
 	align-content: stretch;
 }
 
+.comment-event-header {
+    background-color: lightblue;
+    border: 4px solid $navbar-border;
+    display: flex;
+	justify-content: center;
+}
+
+.comment-event-body {
+    background-color: lightblue;
+    border: 4px solid $navbar-border;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+}
+
 .comment-form {
     background-color: $navbar-border;
     padding-top: .5rem;

@@ -9,7 +9,7 @@
                 <h4>Start-time: {{event.time}}</h4>
                 <h4>Location: {{locations[i]}}</h4>
             </div>
-            <div class="event-header">
+            <div class="comment-event-header">
                 <h3>Comments</h3>
             </div>
             <div *ngFor="let comment of comments[i]" class="event-body">
@@ -21,9 +21,9 @@
                 <form #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm)">
                     <div class="form-group">
                         <input type="text"
-                            id="comment-text"
+                            id="commentText"
                             class="form-control"
-                            name="comment-text"
+                            name="commentText"
                             ngModel
                             required
                             placeholder="comment"
@@ -50,7 +50,7 @@
                     </div>
                 </form>
             </div>
-            <button (click)="isAddingComment = !isAddingComment" class="btn btn-primary">Add Comment</button>
+            <button (click)="addComment(event.id)" class="btn btn-primary">Add Comment</button>
             <!--TODO: Add comment. addComment(event.id)-->
         </div>
     </div>

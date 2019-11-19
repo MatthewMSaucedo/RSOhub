@@ -1,1 +1,19 @@
-<p>rso works!</p>
+<div class="container">
+    <div *ngIf="!isLoading" class="rso-body">
+        <div *ngFor="let rso of rsos; let i = index" class="rso-card-container">
+            <div class="rso-header">
+                <h1>Name: {{rso.name}}</h1>
+            </div>
+            <div class="rso-body">
+                <h4>member-count: {{rso.memberCount}}</h4>
+                <h4 *ngIf="rso.active">Status: Active</h4>
+                <h4 *ngIf="!rso.active">Status: Inactive; RSO needs more members</h4>
+            </div>
+            <div *ngIf="shouldDisplayJoinButton(rso.id)">
+                <button (click)="joinRso(rso.id)" class="btn btn-primary">
+                    Join
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,15 +36,15 @@ export class RsoEndpointService {
         return this.http.post<ListCommentResponse>(this._dbUrl + 'comment/listByEvent', eventId).toPromise();
     }
 
-    public listRsoByUserId(userId: number): Promise<ListRsoByUserIdResponse> {
-        return this.http.post<ListRsoByUserIdResponse>(this._dbUrl + 'rso/listByUserId', userId).toPromise();
+    public listRsoByUserId(userId: number) {
+        return this.http.post(this._dbUrl + 'rso/listByUserId', userId).toPromise();
     }
 
     public createPetition(petitionRequest: PetitionRequest) {
         return this.http.post(this._dbUrl + 'rso/petition', petitionRequest).toPromise();
     }
 
-    public joinRso(joinRequest: JoinRequest) {
+    public joinRso(joinRequest) {
         return this.http.post(this._dbUrl + 'rso/join', joinRequest).toPromise();
     }
 
@@ -52,7 +52,7 @@ export class RsoEndpointService {
         return this.http.post<number>(this._dbUrl + 'university/findByName', request).toPromise();
     }
 
-    public listUserEvents(request): Promise<_Event[]> {
+    public listUserEvents(request) {
         return this.http.post(this._dbUrl + 'event/listUserEvents', request).toPromise();
     }
 
@@ -60,4 +60,11 @@ export class RsoEndpointService {
         return this.http.post<GetLocationResponse>(this._dbUrl + 'location/get', request).toPromise();
     }
 
+    public isUserInRso(request) {
+        return this.http.post(this._dbUrl + 'rso/isUserInRso', request).toPromise();
+    }
+
+    public listRso() {
+        return this.http.post(this._dbUrl + 'rso/list', null).toPromise();
+    }
 }
