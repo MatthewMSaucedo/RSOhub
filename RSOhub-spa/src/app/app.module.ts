@@ -11,6 +11,10 @@ import { LoginComponent } from './authorization/login.component';
 import { RegisterComponent } from './authorization/register.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+import { EventsComponent } from './events/events.component';
+import { UniversityComponent } from './university/university.component';
+import { PetitionComponent } from './petition/petition.component';
+import { RsoComponent } from './rso/rso.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { HeaderComponent } from './header/header.component';
     AuthComponent,
     LoginComponent,
     RegisterComponent,
+    EventsComponent,
+    UniversityComponent,
+    PetitionComponent,
+    RsoComponent,
   ],
   imports: [
     BrowserModule,

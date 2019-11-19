@@ -48,7 +48,11 @@ export class RsoEndpointService {
     }
 
     public getUniversityIdFromName(request): Promise<number> {
-        return this.http.post<number>(this._dbUrl + 'university/findByName', request, this.httpOptions).toPromise();
+        return this.http.post<number>(this._dbUrl + 'university/findByName', request).toPromise();
+    }
+
+    public listUserEvents(request) {
+        return this.http.post(this._dbUrl + 'event/listUserEvents', request).toPromise();
     }
 
 }

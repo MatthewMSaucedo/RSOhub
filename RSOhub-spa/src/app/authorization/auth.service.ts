@@ -10,6 +10,7 @@ export class AuthService {
     public isLoggedIn = new Subject<boolean>();
     public loggedInUser: string;
     public userType: string;
+    public userId: number;
 
     constructor(public endpointService: RsoEndpointService) { }
 
@@ -32,10 +33,12 @@ export class AuthService {
         try {
             const response = await this.endpointService.login({username, password});
             if (response.loginSuccessful) {
-                this.loginToast.next(true);
-                this.isLoggedIn.next(true);
+                console.log(response);
                 this.loggedInUser = username;
                 this.userType = response.userType;
+                this.userId = response.userId;
+                this.loginToast.next(true);
+                this.isLoggedIn.next(true);
             } else {
                 this.loginToast.next(false);
             }

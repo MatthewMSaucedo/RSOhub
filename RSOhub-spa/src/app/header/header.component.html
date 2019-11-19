@@ -20,15 +20,63 @@
                 </a>
             </div>
             <div
-                *ngIf="isLoggedIn"
+                *ngIf="isLoggedIn && userType !== 'SUPER_ADMIN'"
                 class="smt-nav-item"
                 routerLinkActive="smt-active-nav">
                 <span
-                    class="oi oi-person icon-color"
+                    class="oi oi-copywriting icon-color"
                     aria-hidden="true">
                 </span>
-                <a routerLink=TODO:>
-                    Profile
+                <a routerLink="#"> <!--TODO:-->
+                    RSO Petition
+                </a>
+            </div> 
+            <div
+                *ngIf="isLoggedIn && userType !== 'SUPER_ADMIN'"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-calendar icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink="#"> <!--TODO:-->
+                    My Events
+                </a>
+            </div> 
+            <div
+                *ngIf="isLoggedIn && userType !== 'SUPER_ADMIN'"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-plus icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink="#"> <!--TODO:-->
+                    Join RSO
+                </a>
+            </div> 
+            <div
+                *ngIf="isLoggedIn && userType === 'ADMIN'"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-plus icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink="#"> <!--TODO:-->
+                    Create Event
+                </a>
+            </div> 
+            <div
+                *ngIf="isLoggedIn && userType === 'SUPER_ADMIN'"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-book icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink="#"> <!--TODO:-->
+                    Create University
                 </a>
             </div>
         </div>

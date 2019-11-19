@@ -72,7 +72,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.toastSubscription = this.authService.loginToast.subscribe((success: boolean) => {
             if (success) {
                 this._toastrService.success(`Welcome, ${this._username}!`, 'Login succeeded');
-                //this.router.navigate(['security-analysis']); TODO: Route somewhere.
+                if (this.authService.userType === 'STANDARD') {
+                    this.router.navigate(['events']);
+                } else if (this.authService.userType === 'ADMIN') {
+                    this.router.navigate(['events']);
+                } else {
+                    this.router.navigate(['university']);
+                }
             } else {
                 this._toastrService.error('Login failed');
             }

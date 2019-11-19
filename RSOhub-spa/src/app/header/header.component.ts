@@ -9,12 +9,17 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     public isLoggedIn = false;
+    public userType: string;
     authSubscription: Subscription;
 
     constructor(public authService: AuthService) { }
 
     ngOnInit() {
         this.authSubscription = this.authService.isLoggedIn.subscribe((loginStatus: boolean) => {
+            if (!this.isLoggedIn && loginStatus) {
+                this.userType = this.authService.userType;
+            }
+            console.log(this.userType);
             this.isLoggedIn = loginStatus;
         });
     }

@@ -1,5 +1,6 @@
 export interface LoginResponse {
     username: string;
+    userId: number;
     userType: string;
     loginSuccessful: boolean;
 }
