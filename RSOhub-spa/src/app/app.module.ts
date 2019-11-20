@@ -16,6 +16,7 @@ import { UniversityComponent } from './university/university.component';
 import { PetitionComponent } from './petition/petition.component';
 import { RsoComponent } from './rso/rso.component';
 import { MakeEventComponent } from './make-event/make-event.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,9 @@ import { MakeEventComponent } from './make-event/make-event.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyC-ohf1XS3FVDk3RzR5sqkMpQL9-TfmrOw'
+    })
   ],
   providers: [ HttpClient ],
   bootstrap: [ AppComponent ]

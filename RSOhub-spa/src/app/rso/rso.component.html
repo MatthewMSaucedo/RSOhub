@@ -9,7 +9,7 @@
                 <h4 *ngIf="rso.active">Status: Active</h4>
                 <h4 *ngIf="!rso.active">Status: Inactive; RSO needs more members</h4>
             </div>
-            <div *ngIf="shouldDisplayJoinButton(rso.id)">
+            <div *ngIf="!shouldDisplayJoinButton[i]">
                 <button (click)="joinRso(rso.id)" class="btn btn-primary">
                     Join
                 </button>

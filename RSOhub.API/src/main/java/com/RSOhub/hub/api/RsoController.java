@@ -4,6 +4,7 @@ import com.RSOhub.hub.dao.RsoMembershipRepository;
 import com.RSOhub.hub.dao.RsoPetitionRepository;
 import com.RSOhub.hub.dao.RsoRepository;
 import com.RSOhub.hub.dao.UserRepository;
+import com.RSOhub.hub.dto.IsUserInRsoRequest;
 import com.RSOhub.hub.dto.JoinRequest;
 import com.RSOhub.hub.dto.PetitionRequest;
 import com.RSOhub.hub.model.Rso;
@@ -65,26 +66,51 @@ public class RsoController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "join")
     public Rso join(@RequestBody JoinRequest joinRequest) {
-        RsoMembership rsoMembership = new RsoMembership();
-        Rso rso = rsoRepository.findById(joinRequest.getRefRsoId()).get();
-        rso.setMemberCount(rso.getMemberCount() + 1);
+        try {
+            boolean isUserInRso;
 
-        if (rso.getMemberCount() == 5) {
-            rso.isActive = true;
-            RsoPetition petition = rsoPetitionRepository.findByRefRsoId(rso.getId());
-            int founderId = petition.getRefUserId();
-            User founder = userRepository.findById(founderId).get();
-            founder.setUserType("ADMIN");
+            // Get list of RSOs user is in.
+            List<Rso> rsosUserIsIn = rsoMembershipRepository.findByRefUserId(joinRequest.getRefUserId()).stream()
+                    .map(rsoMembership -> rsoMembership.getRefRsoId())
+                    .map(rsoRepository::findById)
+                    .map(rso -> rso.get())
+                    .collect(Collectors.toList());
 
-            rsoPetitionRepository.delete(petition);
+            // If request RSO is in that list, then the user is in the request RSO.
+            for (Rso rso : rsosUserIsIn) {
+                if (rso.getId() == joinRequest.getRefRsoId()) {
+                    isUserInRso = true;
+                }
+            }
+            isUserInRso = false;
+
+            if (isUserInRso) {
+                return null;
+            }
+
+            RsoMembership rsoMembership = new RsoMembership();
+            Rso rso = rsoRepository.findById(joinRequest.getRefRsoId()).get();
+            rso.setMemberCount(rso.getMemberCount() + 1);
+
+            if (rso.getMemberCount() == 5) {
+                rso.isActive = true;
+                RsoPetition petition = rsoPetitionRepository.findByRefRsoId(rso.getId());
+                int founderId = petition.getRefUserId();
+                User founder = userRepository.findById(founderId).get();
+                founder.setUserType("ADMIN");
+
+                rsoPetitionRepository.delete(petition);
+            }
+
+            rsoRepository.save(rso);
+            rsoMembership.setRefRsoId(rso.getId());
+            rsoMembership.setRefUserId(joinRequest.getRefUserId());
+            rsoMembershipRepository.save(rsoMembership);
+
+            return rso;
+        } catch (Exception e) {
+            return null;
         }
-
-        rsoRepository.save(rso);
-        rsoMembership.setRefRsoId(rso.getId());
-        rsoMembership.setRefUserId(joinRequest.getRefUserId());
-        rsoMembershipRepository.save(rsoMembership);
-
-        return rso;
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -137,4 +163,26 @@ public class RsoController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(path = "isUserInRso")
+    public boolean isUserInRso(@RequestBody IsUserInRsoRequest isUserInRsoRequest) {
+        try {
+            // Get list of RSOs user is in.
+            List<Rso> rsosUserIsIn = rsoMembershipRepository.findByRefUserId(isUserInRsoRequest.getRefUserId()).stream()
+                    .map(rsoMembership -> rsoMembership.getRefRsoId())
+                    .map(rsoRepository::findById)
+                    .map(rso -> rso.get())
+                    .collect(Collectors.toList());
+
+            // If request RSO is in that list, then the user is in the request RSO.
+            for (Rso rso : rsosUserIsIn) {
+                if (rso.getId() == isUserInRsoRequest.getRefRsoId()) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

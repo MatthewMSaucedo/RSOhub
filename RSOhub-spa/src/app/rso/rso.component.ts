@@ -10,6 +10,7 @@ import { AuthService } from '../authorization/auth.service';
 export class RsoComponent implements OnInit {
     public rsos;
     public isLoading = true;
+    public shouldDisplayJoinButton = [];
 
     constructor(
         public rsoService: RsoService,
@@ -18,10 +19,14 @@ export class RsoComponent implements OnInit {
 
     async ngOnInit() {
         this.rsos = await this.rsoService.listRsos();
+        for (let i = 0; i < this.rsos.length; i++) {
+            let refRsoId = this.rsos[i].id;
+            this.shouldDisplayJoinButton[i] = await this.shouldDisplayJoinButtonFunc(refRsoId);
+        }
         this.isLoading = false;
     }
 
-    async shouldDisplayJoinButton(refRsoId: number) {
+    async shouldDisplayJoinButtonFunc(refRsoId: number) {
         return await this.rsoService.isUserInRso(refRsoId);
     }
 

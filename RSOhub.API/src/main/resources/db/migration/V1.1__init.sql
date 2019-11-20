@@ -43,6 +43,10 @@ insert into user
 VALUES (3, 2, 'testUser2', 'hashedPassword3', 'STANDARD');
 insert into user
 VALUES (4, 2, 'adminUser2', 'hashedPassword4', 'ADMIN');
+insert into user
+VALUES (5, 1, 'superAdminUser1', 'hashedPassword5', 'SUPER_ADMIN');
+insert into user
+VALUES (6, 2, 'superAdminUser2', 'hashedPassword6', 'SUPER_ADMIN');
 
 /* id, rsoId, userId */
 insert into rso_membership

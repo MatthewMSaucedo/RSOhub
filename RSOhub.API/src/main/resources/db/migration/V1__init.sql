@@ -54,7 +54,8 @@ CREATE TABLE user (
 CREATE TABLE rso_membership (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     ref_rso_id INT(6) UNSIGNED NULL,
-    ref_user_id INT(6) UNSIGNED NULL
+    ref_user_id INT(6) UNSIGNED NULL,
+    UNIQUE KEY (ref_rso_id, ref_user_id)
 );
 
 CREATE TABLE rso_petition (

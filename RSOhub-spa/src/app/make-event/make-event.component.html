@@ -1,1 +1,65 @@
-<p>make-event works!</p>
+<div class="container">
+    <form *ngIf="!formIsSubmitted" #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+        <div class="form-group shorter-input-box">
+            <input type="text"
+                id="location"
+                class="form-control"
+                name="location"
+                ngModel
+                required
+                placeholder="Location"
+            />
+        </div>
+        <div class="form-group shorter-input-box">
+            <input type="text"
+                id="rso"
+                class="form-control"
+                name="rso"
+                ngModel
+                required
+                placeholder="RSO"
+            />
+        </div>
+        <div class="form-group shorter-input-box">
+            <input type="text"
+                id="time"
+                class="form-control"
+                name="time"
+                ngModel
+                required
+                placeholder="Time"
+            />
+        </div>
+        <div class="form-group shorter-input-box">
+            <input type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                ngModel
+                required
+                placeholder="Name"
+            />
+        </div>
+        <div class="form-group shorter-input-box">
+            <input type="text"
+                id="description"
+                class="form-control"
+                name="description"
+                ngModel
+                required
+                placeholder="Description"
+            />
+        </div>
+        <div class="text-center shorter-input-button">
+            <button
+                class="btn btn-primary btn-block"
+                type="submit"
+                [disabled]="!registrationForm.valid">
+                Submit
+            </button>
+        </div>
+    </form>
+    <agm-map [latitude]="latitude" [zoom]="zoom" [longitude]="longitude">
+        <agm-marker  [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+</div>

@@ -2,6 +2,7 @@ package com.RSOhub.hub.api;
 
 import com.RSOhub.hub.dao.EventRepository;
 import com.RSOhub.hub.dao.RsoMembershipRepository;
+import com.RSOhub.hub.dto.ListUserEventsRequest;
 import com.RSOhub.hub.model.Event;
 import com.RSOhub.hub.model.Rso;
 import com.RSOhub.hub.model.RsoMembership;
@@ -51,8 +52,8 @@ public class EventController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "listUserEvents")
-    public List<Event> listUserEvents(@RequestBody User user) {
-        List<RsoMembership> userRsos = rsoMembershipRepository.findByRefUserId(user.getId());
+    public List<Event> listUserEvents(@RequestBody ListUserEventsRequest listUserEventsRequest) {
+        List<RsoMembership> userRsos = rsoMembershipRepository.findByRefUserId(listUserEventsRequest.getRefUserId());
         return userRsos.stream()
                 .map(rso -> rso.getRefRsoId())
                 .map(eventRepository::findByRefRsoId)

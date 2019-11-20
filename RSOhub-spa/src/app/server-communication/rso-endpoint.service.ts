@@ -40,7 +40,7 @@ export class RsoEndpointService {
         return this.http.post(this._dbUrl + 'rso/listByUserId', userId).toPromise();
     }
 
-    public createPetition(petitionRequest: PetitionRequest) {
+    public createPetition(petitionRequest) {
         return this.http.post(this._dbUrl + 'rso/petition', petitionRequest).toPromise();
     }
 

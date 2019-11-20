@@ -1,1 +1,32 @@
-<p>petition works!</p>
+<div class="container">
+    <form *ngIf="!formIsSubmitted" #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+        <div class="form-group shorter-input-box">
+            <input type="text"
+                id="rsoName"
+                class="form-control"
+                name="rsoName"
+                ngModel
+                required
+                placeholder="RSO Name"
+            />
+        </div>
+        <div class="form-group shorter-input-box">
+            <input type="text"
+                id="description"
+                class="form-control"
+                name="description"
+                ngModel
+                required
+                placeholder="Description"
+            />
+        </div>
+        <div class="text-center shorter-input-button">
+            <button
+                class="btn btn-primary btn-block"
+                type="submit"
+                [disabled]="!registrationForm.valid">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

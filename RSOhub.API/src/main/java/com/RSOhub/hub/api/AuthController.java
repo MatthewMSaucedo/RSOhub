@@ -32,7 +32,7 @@ public class AuthController {
             if (foundUser == null) {
                 return new LoginResponse(false);
             }
-            return new LoginResponse(foundUser.getUsername(), foundUser.getUserType(), true);
+            return new LoginResponse(foundUser.getUsername(), foundUser.getId(), foundUser.getUserType(), true);
         } catch (Exception e) {
             return new LoginResponse(false);
         }
@@ -55,10 +55,32 @@ public class AuthController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping(path = "register_generic")
-    public User register(@RequestBody User user) {
+    @PostMapping(path = "registerSuper")
+    public User registerSuper(@RequestBody LoginOrRegisterRequest registerRequest) {
         try {
-            return userRepository.save(user);
+            String hashedPassword = encryptPassword(registerRequest.getPassword());
+            User newUser = new User(
+                    registerRequest.getUsername(),
+                    hashedPassword, registerRequest.getRefUniversityId(),
+                    "SUPER_ADMIN"
+            );
+            return userRepository.save(newUser);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(path = "registerAdmin")
+    public User registerAdmin(@RequestBody LoginOrRegisterRequest registerRequest) {
+        try {
+            String hashedPassword = encryptPassword(registerRequest.getPassword());
+            User newUser = new User(
+                    registerRequest.getUsername(),
+                    hashedPassword, registerRequest.getRefUniversityId(),
+                    "ADMIN"
+            );
+            return userRepository.save(newUser);
         } catch (Exception e) {
             return null;
         }
