@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-university',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UniversityComponent implements OnInit {
 
-  constructor() { }
+    constructor(public toastrService: ToastrService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() { }
+
+    public onSubmit(form) {
+        this.toastrService.success('University created successfully!');
+    }
 
 }

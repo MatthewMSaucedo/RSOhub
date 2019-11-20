@@ -4,6 +4,7 @@ import com.RSOhub.hub.dao.RsoMembershipRepository;
 import com.RSOhub.hub.dao.RsoPetitionRepository;
 import com.RSOhub.hub.dao.RsoRepository;
 import com.RSOhub.hub.dao.UserRepository;
+import com.RSOhub.hub.dto.GetRsoIdByNameRequest;
 import com.RSOhub.hub.dto.IsUserInRsoRequest;
 import com.RSOhub.hub.dto.JoinRequest;
 import com.RSOhub.hub.dto.PetitionRequest;
@@ -184,5 +185,12 @@ public class RsoController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(path = "getRsoIdByName")
+    public int getRsoByName(@RequestBody GetRsoIdByNameRequest getRsoByNameRequest) {
+        Rso rso = rsoRepository.findByName(getRsoByNameRequest.getRsoName());
+        return rso.getId();
     }
 }

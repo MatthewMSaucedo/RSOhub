@@ -1,6 +1,7 @@
 package com.RSOhub.hub.api;
 
 import com.RSOhub.hub.dao.LocationRepository;
+import com.RSOhub.hub.dto.CreateLocationRequest;
 import com.RSOhub.hub.dto.GetLocationRequest;
 import com.RSOhub.hub.model.Location;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,12 @@ public class LocationController {
     @PostMapping(path = "get")
     public Location getLocation(@RequestBody GetLocationRequest getLocationRequest) {
         return locationRepository.findById(getLocationRequest.getRefLocationId()).get();
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(path = "create")
+    public Location getLocation(@RequestBody CreateLocationRequest createLocationRequest) {
+        Location location = new Location(createLocationRequest.getName());
+        return locationRepository.save(location);
     }
 }

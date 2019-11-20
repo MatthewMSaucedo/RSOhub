@@ -26,4 +26,11 @@ public class University {
         this.refLocationId = refLocationId;
         this.numberOfStudents = numberOfStudents;
     }
+
+    public University(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.refLocationId = refLocationId;
+        this.numberOfStudents = numberOfStudents;
+    }
 }

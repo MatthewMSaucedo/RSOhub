@@ -7,10 +7,13 @@ export class MakeEventService {
 
     public async createEvent(eventRequest) {
         // Create location.
-        const locationId = await this.rsoEndpointService.createLocation(eventRequest.locationName);
+        const location: any = await this.rsoEndpointService.createLocation({ name: eventRequest.locationName });
+        const locationId = location.id;
+        console.log(eventRequest);
+        console.log("hi");
 
         // Get RSO id.
-        const rsoId = await this.rsoEndpointService.getRsoIdByName(eventRequest.rsoName);
+        const rsoId = await this.rsoEndpointService.getRsoIdByName({ rsoName: eventRequest.rsoName});
 
         const createEventRequest = {
             refLocationId: locationId,
@@ -23,5 +26,9 @@ export class MakeEventService {
 
         // Create event.
         await this.rsoEndpointService.createEvent(createEventRequest);
+    }
+
+    public async testGetRso(request) {
+        let response = await this.rsoEndpointService.getRsoIdByName(request);
     }
 }

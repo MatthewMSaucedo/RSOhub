@@ -27,7 +27,7 @@
                     class="oi oi-copywriting icon-color"
                     aria-hidden="true">
                 </span>
-                <a routerLink="/petition"> <!--TODO:-->
+                <a routerLink="/petition">
                     RSO Petition
                 </a>
             </div> 
@@ -39,7 +39,7 @@
                     class="oi oi-calendar icon-color"
                     aria-hidden="true">
                 </span>
-                <a routerLink="/events"> <!--TODO:-->
+                <a routerLink="/events">
                     My Events
                 </a>
             </div> 
@@ -51,7 +51,7 @@
                     class="oi oi-plus icon-color"
                     aria-hidden="true">
                 </span>
-                <a routerLink="/rso"> <!--TODO:-->
+                <a routerLink="/rso">
                     Join RSO
                 </a>
             </div> 
@@ -63,7 +63,7 @@
                     class="oi oi-plus icon-color"
                     aria-hidden="true">
                 </span>
-                <a routerLink="/make-event"> <!--TODO:-->
+                <a routerLink="/make-event">
                     Create Event
                 </a>
             </div> 
@@ -75,8 +75,20 @@
                     class="oi oi-book icon-color"
                     aria-hidden="true">
                 </span>
-                <a routerLink="/university"> <!--TODO:-->
+                <a routerLink="/university">
                     Create University
+                </a>
+            </div>
+            <div
+                *ngIf="isLoggedIn"
+                class="smt-nav-item"
+                routerLinkActive="smt-active-nav">
+                <span
+                    class="oi oi-book icon-color"
+                    aria-hidden="true">
+                </span>
+                <a routerLink="/">
+                    Logout
                 </a>
             </div>
         </div>

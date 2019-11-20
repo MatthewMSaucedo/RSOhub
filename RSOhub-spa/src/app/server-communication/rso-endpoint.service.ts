@@ -67,4 +67,16 @@ export class RsoEndpointService {
     public listRso() {
         return this.http.post(this._dbUrl + 'rso/list', null).toPromise();
     }
+
+    public createLocation(createRequest) {
+        return this.http.post(this._dbUrl + 'location/create', createRequest).toPromise();
+    }
+
+    public getRsoIdByName(rsoName) {
+        return this.http.post(this._dbUrl + 'rso/getRsoIdByName', rsoName).toPromise();
+    }
+
+    public createEvent(createEventRequest) {
+        return this.http.post(this._dbUrl + 'event/create', createEventRequest).toPromise();
+    }
 }

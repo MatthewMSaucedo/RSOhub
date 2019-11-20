@@ -2,6 +2,7 @@ package com.RSOhub.hub.api;
 
 import com.RSOhub.hub.dao.EventRepository;
 import com.RSOhub.hub.dao.RsoMembershipRepository;
+import com.RSOhub.hub.dto.CreateEventRequest;
 import com.RSOhub.hub.dto.ListUserEventsRequest;
 import com.RSOhub.hub.model.Event;
 import com.RSOhub.hub.model.Rso;
@@ -40,7 +41,15 @@ public class EventController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "create")
-    public Event create(@RequestBody Event event) {
+    public Event create(@RequestBody CreateEventRequest createEventRequest) {
+        Event event = new Event(
+                createEventRequest.getRefLocationId(),
+                createEventRequest.getRefRsoId(),
+                createEventRequest.getTime(),
+                createEventRequest.getName(),
+                createEventRequest.getDescription(),
+                createEventRequest.getEventType()
+        );
         return eventRepository.save(event);
     }
 

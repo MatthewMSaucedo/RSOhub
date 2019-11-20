@@ -8,4 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface RsoRepository extends JpaRepository<Rso, Integer> { }
+public interface RsoRepository extends JpaRepository<Rso, Integer> {
+    Rso findByName(String name);
+}

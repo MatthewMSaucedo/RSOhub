@@ -20,19 +20,22 @@ export class MakeEventComponent implements OnInit {
         public makeEventService: MakeEventService
     ) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     public async onSubmit(form: NgForm) {
         const eventRequest = {
-            rsoName: form.value.rsoName,
+            rsoName: form.value.rso,
             locationName: form.value.location,
             eventTime: form.value.time,
             eventName: form.value.name,
             description: form.value.description,
             eventType: form.value.eventType
         };
-        await this.makeEventService.createEvent(eventRequest);
-        this.toastrService.success('Event created!');
+        try {
+            await this.makeEventService.createEvent(eventRequest);
+            this.toastrService.success('Event created!');
+        } catch (e) {
+            this.toastrService.error('Event creation failed!');
+        }
     }
 }
